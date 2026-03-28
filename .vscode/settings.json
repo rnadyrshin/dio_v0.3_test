@@ -1,9 +1,10 @@
 {
-    "idf.port": "/dev/cu.usbmodem101",
+    "idf.port": "/dev/tty.usbmodem101",
     "idf.flashType": "UART",
     "idf.adapterTargetName": "esp32s3",
     "files.associations": {
         "i2cmaster.h": "c",
         "tca9534.h": "c"
-    }
+    },
+    "idf.currentSetup": "/Users/ruslan/esp/v5.4/esp-idf"
 }

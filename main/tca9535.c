@@ -35,7 +35,8 @@ static bool tca9535_read_reg_pair(void *dev_handle, uint8_t reg_addr, uint16_t* 
     return i2cmaster_write_read(dev_handle, &tx_buff, 1, (uint8_t*) buff, 2);
 }
 
-void *tca9535_init(void* bus_handle, uint8_t i2c_addr, uint16_t out_mask, uint16_t inv_mask) {
+
+i2c_master_dev_handle_t tca9535_init(void* bus_handle, uint8_t i2c_addr, uint16_t out_mask, uint16_t inv_mask) {
     if (!i2cmaster_test(bus_handle, i2c_addr))
         return 0;
     

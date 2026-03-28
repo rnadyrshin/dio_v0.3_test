@@ -131,37 +131,37 @@ void print_val(char* name, uint8_t bit_num, uint32_t val) {
 void app_main(void)
 {
     configure_led();
-    
-    i2c_master_bus_handle_t *bus_handle;
+
+    i2c_master_bus_handle_t bus_handle;
     bus_handle = i2cmaster_init(0);
 
     if (!i2cmaster_test(bus_handle, DIO16_I2C_ADDR))
         ESP_LOGE(TAG, "DIO16 module not found!");
-    if (!i2cmaster_test(bus_handle, DI8_I2C_ADDR))
-        ESP_LOGE(TAG, "DI8-ISO module not found!");
-    if (!i2cmaster_test(bus_handle, DO8_I2C_ADDR))
-        ESP_LOGE(TAG, "DO8 module not found!");
+//    if (!i2cmaster_test(bus_handle, DI8_I2C_ADDR))
+//        ESP_LOGE(TAG, "DI8-ISO module not found!");
+//    if (!i2cmaster_test(bus_handle, DO8_I2C_ADDR))
+//        ESP_LOGE(TAG, "DO8 module not found!");
 
-    i2c_master_dev_handle_t* dio16_handle = tca9535_init(bus_handle, DIO16_I2C_ADDR, 0xFFFF, 0x0000);
-    i2c_master_dev_handle_t* di8_handle = tca9534_init(bus_handle, DI8_I2C_ADDR, 0x00, 0x00);
-    i2c_master_dev_handle_t* do8_handle = tca9534_init(bus_handle, DO8_I2C_ADDR, 0xFF, 0x00);
+    i2c_master_dev_handle_t dio16_handle = tca9535_init(bus_handle, DIO16_I2C_ADDR, 0xFFFF, 0x0000);
+//    i2c_master_dev_handle_t* di8_handle = tca9534_init(bus_handle, DI8_I2C_ADDR, 0x00, 0x00);
+//    i2c_master_dev_handle_t* do8_handle = tca9534_init(bus_handle, DO8_I2C_ADDR, 0xFF, 0x00);
 
     uint8_t cntr = 0;
     uint8_t val_out8 = 0;
     uint16_t val_out16 = 0;
         
     while (1) {
-        blink_led();
+        //blink_led();
         s_led_state = !s_led_state;
 
-        if (di8_handle) {
-            uint8_t di8;
-            if (tca9534_read(di8_handle, &di8))
-                print_val("DI8", 8, di8);
-        }
+//        if (di8_handle) {
+//            uint8_t di8;
+//            if (tca9534_read(di8_handle, &di8))
+//                print_val("DI8", 8, di8);
+//        }
 
-        if (do8_handle)
-            tca9534_write(do8_handle, 1 << (cntr & 0x07));
+//        if (do8_handle)
+//            tca9534_write(do8_handle, 1 << (cntr & 0x07));
     
         if (dio16_handle)
             tca9535_write(dio16_handle, 1 << (15 - cntr));

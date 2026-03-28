@@ -30,7 +30,7 @@ static bool tca9534_read_reg(void *dev_handle, uint8_t reg_addr, uint8_t* buff) 
     return i2cmaster_write_read(dev_handle, &tx_buff, 1, buff, 1);
 }
 
-void *tca9534_init(void* bus_handle, uint8_t i2c_addr, uint8_t out_mask, uint8_t inv_mask) {
+i2c_master_dev_handle_t tca9534_init(void* bus_handle, uint8_t i2c_addr, uint8_t out_mask, uint8_t inv_mask) {
     if (!i2cmaster_test(bus_handle, i2c_addr))
         return 0;
     
